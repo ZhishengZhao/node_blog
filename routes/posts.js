@@ -7,17 +7,18 @@ var checkLogin = require('../middlewares/check').checkLogin;
 //   eg: GET /posts?author=xxx
 router.get('/', function(req, res, next) {
     // res.send(req.flash());
-    // res.render('posts')
-    console.log('post get the data:');
-    // console.log(req.url);
-    var tempArr = req.url.split('&');
-    var fpid = tempArr[0].substr(2);
-    var len = fpid.length + 2;
-    var shortParams = req.url.substr(len);
-    console.log('fpid=' + fpid);
-    console.log('shortParams=' + shortParams);
+    res.render('posts')
+
+    // console.log('post get the data:');
+    // // console.log(req.url);
+    // var tempArr = req.url.split('&');
+    // var fpid = tempArr[0].substr(2);
+    // var len = fpid.length + 2;
+    // var shortParams = req.url.substr(len);
+    // console.log('fpid=' + fpid);
+    // console.log('shortParams=' + shortParams);
     // res.write('the code is heioray');
-    res.send('hello="express"');
+    // res.send('hello="express"');
 });
 
 // POST /posts 发表一篇文章
