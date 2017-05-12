@@ -23,7 +23,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
     var name = req.fields.name;
     var gender = req.fields.gender;
     var bio = req.fields.bio;
-    // var avatar = req.fields.avatar;
+    var avatar = req.fields.avatar;
     var password = req.fields.password;
     var repassword = req.fields.repassword;
 
@@ -45,7 +45,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
         }
     } catch (e) {
         console.log(e);
-        // fs.unlink(req.files.avatar.path);
+        fs.unlink(req.files.avatar.path);
         req.flash('error', e.message);
         return res.redirect('/signup');
     }
@@ -57,7 +57,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
         name: name,
         password: password,
         gender: gender,
-        // avatar: avatar,
+        avatar: avatar,
         bio: bio
     };
 
@@ -73,7 +73,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
         res.redirect('/posts');
     }).catch(function(e) {
         // signup failed, then delete the avatar pic asnyc
-        // fs.unlink(req.files.avatar.path);
+        fs.unlink(req.files.avatar.path);
         // if user has existed, redirect to signup page and show tip
         if (e.message.match('E11000 dubplicate key')) {
             req.flash('error', 'sorry, the user has existed');
