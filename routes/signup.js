@@ -20,10 +20,12 @@ router.post('/', checkNotLogin, function(req, res, next) {
     // res.render('signup', {
     //     name: 'req.params.name'
     // });
+    console.log(req.fields)
     var name = req.fields.name;
     var gender = req.fields.gender;
     var bio = req.fields.bio;
-    var avatar = req.fields.avatar;
+    // var avatar = req.fields.avatar;
+    var avatar = req.files.avatar.path.split(path.sep).pop();
     var password = req.fields.password;
     var repassword = req.fields.repassword;
 
@@ -34,6 +36,9 @@ router.post('/', checkNotLogin, function(req, res, next) {
         if (['m', 'f', 'x'].indexOf(gender) === -1) {
             throw new Error('hey man, your gender is really wird');
         }
+        if (!req.files.avatar.name) {
+            throw new Error('缺少头像');
+        }
         if (password.length < 6 || password.length > 10) {
             throw new Error('password\'s length should be between 6 and 10');
         }
@@ -43,6 +48,7 @@ router.post('/', checkNotLogin, function(req, res, next) {
         if (bio.length > 30 || bio.length < 1) {
             throw new Error('bio\'s length should be between 1 and 30');
         }
+        console.log(avatar, null)
     } catch (e) {
         console.log(e);
         fs.unlink(req.files.avatar.path);
