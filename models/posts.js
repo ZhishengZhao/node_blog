@@ -7,7 +7,7 @@ Post.plugin('addCommentsCount', {
   afterFind: function (posts) {
     return Promise.all(posts.map(function (post) {
       return CommentModel.getCommentCountsByPostId(post._id).then(function (commentsCount) {
-        console.log('-----count------', post._id, commentsCount);
+        // console.log('-----count------', post._id, commentsCount);
         post.commentsCount = commentsCount;
         return post;
       });
@@ -16,7 +16,7 @@ Post.plugin('addCommentsCount', {
   afterFindOne: function (post) {
     if (post) {
       return CommentModel.getCommentCountsByPostId(post._id).then(function (count) {
-        console.log('findone-----count------', post._id, count);
+        // console.log('findone-----count------', post._id, count);
         post.commentsCount = count;
         return post;
       });

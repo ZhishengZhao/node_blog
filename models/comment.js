@@ -26,7 +26,13 @@ module.exports = {
     },
     getCommentCountsByPostId: function getCommentCountsByPostId(postId) {
         var num = Comment.count({postId: postId}).exec();
-        console.log(postId, num);
+        // console.log(postId, num);
         return num;
+    },
+    remove: function remove(commentId, postId) {
+        return Comment.remove({
+            _id: commentId,
+            postId: postId
+        }).exec();
     }
 };
